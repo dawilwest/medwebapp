@@ -58,7 +58,7 @@ class MedPractSignUpView(CreateView):
             codename='view_sickuser',
             content_type=content_type,
         )
-        user.user_permission.add(permission)
+        user.user_permissions.add(permission)
         user.save()
         # permission session ends here
 
