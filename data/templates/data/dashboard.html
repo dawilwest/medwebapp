@@ -61,7 +61,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Total Users</h5>
-                                                <span class="h2 font-weight-bold mb-0">{{users_count}}</span>
+                                                <span id="users-count" class="h2 font-weight-bold mb-0"></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -84,7 +84,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Total Practitioners</h5>
-                                        <span class="h2 font-weight-bold mb-0">{{medicalpractitioner_count}}</span>
+                                        <span id="medicalpractitioner-count" class="h2 font-weight-bold mb-0"></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Total Patients</h5>
-                                        <span class="h2 font-weight-bold mb-0">{{user_count}}</span>
+                                        <span id="user-count" class="h2 font-weight-bold mb-0"></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -171,3 +171,23 @@
 {% comment %} Used to populate chartjs chart {% endcomment %}
 
 {% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        async function getTotalCount(url){
+            let apiData = await fetch(url);
+            let jsonData = await apiData.json();
+            return jsonData.length;
+        }
+
+        var user_count = await getTotalCount(`https://${window.location.hostname}:8000/api/data/users/`);
+        var patients_count = await getTotalCount(`https://${window.location.hostname}:8000/api/data/user/`);
+        var practitioners_count = await getTotalCount(`https://${window.location.hostname}:8000/api/data/medicalpractitioner/`);
+
+
+        document.getElementById('users-count').innerHTML = users_count;
+        document.getElementById('user-count').innerHTMl = user_count;
+        document.getElementById('medicalpractitioner-count').innerHTML = medicalpractitioner_count;
+
+    </script>
+{% endblock script %}

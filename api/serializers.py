@@ -18,6 +18,12 @@ class SickUserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class MedicalPractitionerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MedicalPractitioner
+        fields = "__all__"
+
+
 class MedicalDataSerializer(serializers.HyperlinkedModelSerializer):
     sickuser = SickUserSerializer()
 

@@ -1061,7 +1061,7 @@ var MedicalChart = (function() {
   async function init($chart) {
     // data fetching from rest api
     var host = window.location.hostname;
-    var apiData = await fetch("http://" + host + ":8000/api/data/");
+    var apiData = await fetch("https://" + host + ":8000/api/data/medic");
     var jsonData = await apiData.json();
 
     function filterDataFunction(index, name) {

@@ -31,7 +31,8 @@ class MyUser(AbstractUser):
     marital_status = models.CharField(max_length=10, choices=SELECT_MARITAL_STATUS)
 
     def __str__(self):
-        return f"{self.first_name} {self.middle_name or ''} {self.last_name}"
+        # return f"{self.first_name} {self.middle_name or ''} {self.last_name}"
+        return f"{self.username}"
 
     class Meta:
         verbose_name_plural = "Accounts"

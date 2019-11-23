@@ -42,6 +42,10 @@
   <script src="{% static 'assets/js/plugins/chart.js/dist/Chart.extension.js' %}"></script>
   <!--   Argon JS   -->
   <script src="{% static 'assets/js/argon-dashboard.js' %}"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  {% comment %}<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  {% endcomment %}
+  {% block script %}
+
+  {% endblock script %}
 </body>
 </html>
