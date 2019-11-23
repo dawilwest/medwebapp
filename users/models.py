@@ -43,7 +43,7 @@ class SickUser(models.Model):
         "users.MyUser",
         verbose_name="user name",
         on_delete=models.CASCADE,
-        # related_name="sickuser_user",
+        related_name="sickuser_user",
         blank=True,
         null=True
     )
@@ -68,11 +68,11 @@ class SickUser(models.Model):
 
 class MedicalPractitioner(models.Model):
     myuser = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        # "users.MyUser",
+        # settings.AUTH_USER_MODEL,
+        "users.MyUser",
         verbose_name="user name",
         on_delete=models.CASCADE,
-        # related_name="medicalpractitioner_user",
+        related_name="medicalpractitioner_user",
         blank=True,
         null=True
     )
