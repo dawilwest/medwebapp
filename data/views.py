@@ -24,40 +24,40 @@ class DashBoardView(LoginRequiredMixin, TemplateView):
 
 class StatisticsView(LoginRequiredMixin, ListView):
     # All Users can View this page as long as they are logged into their accounts
-    # User = get_user_model()
-    # users_count = User.objects.all().count()
-    # user_count = SickUser.objects.all().count()
-    # medicalpractitioner_count = MedicalPractitioner.objects.all().count()
-    # medical_data_count = MedicalData.objects.all().count()
+    User = get_user_model()
+    users_count = User.objects.all().count()
+    user_count = SickUser.objects.all().count()
+    medicalpractitioner_count = MedicalPractitioner.objects.all().count()
+    medical_data_count = MedicalData.objects.all().count()
 
-    # medical_data = MedicalData.objects.all()
+    medical_data = MedicalData.objects.all()
 
-    # queryset = SickUser.objects.all()
+    queryset = SickUser.objects.all()
     context_object_name = "sickusers_list"
     template_name = "data/sickuser_statistics.html"
-    # try:
-    #     extra_context = {
-    #         "users_count": users_count,
-    #         "user_count": round(user_count / users_count) * 100,
-    #         "medicalpractitioner_count": round((medicalpractitioner_count / users_count) * 100, 1),
-    #         "medical_data_count": medical_data_count,
+    try:
+        extra_context = {
+            "users_count": users_count,
+            "user_count": round(user_count / users_count) * 100,
+            "medicalpractitioner_count": round((medicalpractitioner_count / users_count) * 100, 1),
+            "medical_data_count": medical_data_count,
 
-    #         # Data Table
-    #         "asthma": medical_data.filter(disease__startswith="Asthma").count,
-    #         "asthma_percentage": round((medical_data.filter(disease__startswith="Asthma").count() / medical_data.count()) * 100),
-    #         "sicklecelldisease": medical_data.filter(disease__startswith="Sickle Cell Disease").count(),
-    #         "sicklecelldisease_percentage": round((medical_data.filter(disease__startswith="Sickle Cell Disease").count() / medical_data.count()) * 100),
-    #         "hypertension": medical_data.filter(disease__startswith="Hypertension").count,
-    #         "hypertensioin_percentage": round((medical_data.filter(disease__startswith="Hypertension").count() / medical_data.count()) * 100),
-    #         "allergies": medical_data.filter(disease__startswith="Allergies").count,
-    #         "allergies_percentage": round((medical_data.filter(disease__startswith="Allergies").count() / medical_data.count()) * 100),
-    #         "lungdisease": medical_data.filter(disease__startswith="Lung Disease").count,
-    #         "lungdisease_percentage": round((medical_data.filter(disease__startswith="Lung Disease").count() / medical_data.count()) * 100),
-    #         "others": medical_data.filter(disease__startswith="Others").count,
-    #         "others_percentage": round((medical_data.filter(disease__startswith="Others").count() / medical_data.count()) * 100),
-    #     }
-    # except ZeroDivisionError:
-    #     pass
+            # Data Table
+            "asthma": medical_data.filter(disease__startswith="Asthma").count,
+            "asthma_percentage": round((medical_data.filter(disease__startswith="Asthma").count() / medical_data.count()) * 100),
+            "sicklecelldisease": medical_data.filter(disease__startswith="Sickle Cell Disease").count(),
+            "sicklecelldisease_percentage": round((medical_data.filter(disease__startswith="Sickle Cell Disease").count() / medical_data.count()) * 100),
+            "hypertension": medical_data.filter(disease__startswith="Hypertension").count,
+            "hypertensioin_percentage": round((medical_data.filter(disease__startswith="Hypertension").count() / medical_data.count()) * 100),
+            "allergies": medical_data.filter(disease__startswith="Allergies").count,
+            "allergies_percentage": round((medical_data.filter(disease__startswith="Allergies").count() / medical_data.count()) * 100),
+            "lungdisease": medical_data.filter(disease__startswith="Lung Disease").count,
+            "lungdisease_percentage": round((medical_data.filter(disease__startswith="Lung Disease").count() / medical_data.count()) * 100),
+            "others": medical_data.filter(disease__startswith="Others").count,
+            "others_percentage": round((medical_data.filter(disease__startswith="Others").count() / medical_data.count()) * 100),
+        }
+    except ZeroDivisionError:
+        pass
 
 
 class MedicalDataView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
