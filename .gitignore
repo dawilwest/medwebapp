@@ -130,3 +130,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+users/__pycache__/views.cpython-37.pyc
+medwebapp/__pycache__/urls.cpython-37.pyc
+medwebapp/__pycache__/settings.cpython-37.pyc

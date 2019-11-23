@@ -6,6 +6,7 @@ from users.models import MyUser, SickUser, MedicalPractitioner
 # Django Permissions
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.http.response import HttpResponseRedirect
 from django.db import IntegrityError
 
 
@@ -17,23 +18,16 @@ class SignUpView(CreateView):
     form_class = MyUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'users/signup.html'
-    model = SickUser
+    model = MyUser
 
     def form_valid(self, form):
+        super().form_valid(form)
         try:
-            user = MyUser(
-                username=form.cleaned_data["username"],
-                first_name=form.cleaned_data["first_name"],
-                last_name=form.cleaned_data["last_name"],
-            )
-            user.set_password(form.cleaned_data["password1"])
-            user = form.save()
-        except IntegrityError as e:
+            SickUser.objects.create(myuser=self.object)
+        except IntegrityError:
             return super().form_valid(form)
         else:
-            form.instance.profile = user
-
-        return super().form_valid(form)
+            return HttpResponseRedirect(self.get_success_url())
 
 
 class MedPractSignUpView(CreateView):
