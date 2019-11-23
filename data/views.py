@@ -25,7 +25,7 @@ class DashBoardView(LoginRequiredMixin, TemplateView):
 class StatisticsView(LoginRequiredMixin, ListView):
     # All Users can View this page as long as they are logged into their accounts
     User = get_user_model()
-    users_count = User.objects.all().count()
+    # users_count = User.objects.all().count()
     user_count = SickUser.objects.all().count()
     medicalpractitioner_count = MedicalPractitioner.objects.all().count()
     medical_data_count = MedicalData.objects.all().count()
@@ -37,7 +37,7 @@ class StatisticsView(LoginRequiredMixin, ListView):
     template_name = "data/sickuser_statistics.html"
     try:
         extra_context = {
-            "users_count": users_count,
+            # "users_count": users_count,
             "user_count": round(user_count / users_count) * 100,
             "medicalpractitioner_count": round((medicalpractitioner_count / users_count) * 100, 1),
             "medical_data_count": medical_data_count,
