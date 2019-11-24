@@ -38,8 +38,8 @@ class StatisticsView(LoginRequiredMixin, ListView):
     try:
         extra_context = {
             "users_count": users_count,
-            "user_count": round((user_count / users_count) * 100),
-            "medicalpractitioner_count": round((medicalpractitioner_count / users_count) * 100),
+            "user_count": (users_count - medicalpractitioner_count),
+            "medicalpractitioner_count": (users_count - user_count),
             "medical_data_count": medical_data_count,
 
             # Data Table
@@ -48,7 +48,7 @@ class StatisticsView(LoginRequiredMixin, ListView):
             "sicklecelldisease": medical_data.filter(disease__startswith="Sickle Cell Disease").count(),
             "sicklecelldisease_percentage": round((medical_data.filter(disease__startswith="Sickle Cell Disease").count() / medical_data.count()) * 100),
             "hypertension": medical_data.filter(disease__startswith="Hypertension").count,
-            "hypertensioin_percentage": round((medical_data.filter(disease__startswith="Hypertension").count() / medical_data.count()) * 100),
+            "hypertension_percentage": round((medical_data.filter(disease__startswith="Hypertension").count() / medical_data.count()) * 100),
             "allergies": medical_data.filter(disease__startswith="Allergies").count,
             "allergies_percentage": round((medical_data.filter(disease__startswith="Allergies").count() / medical_data.count()) * 100),
             "lungdisease": medical_data.filter(disease__startswith="Lung Disease").count,

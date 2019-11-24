@@ -22,8 +22,8 @@
                                         <p class="font-weight-bold">Birthday: {{user.date_of_birth}}</p> {% endcomment %}
                                         <form method="POST" class="bootstrap4" novalidate>
                                             {% csrf_token %}
-                                            {{form|crispy}}
-                                            <button type="submit" href="#" class="btn btn-md btn-primary mt-3">Save</button>
+                                            {{ form|crispy }}
+                                            <button type="submit" href="{% url 'data:dashboard' %}" class="btn btn-md btn-primary mt-3">Save</button>
                                         </form>
                                     </div>
 

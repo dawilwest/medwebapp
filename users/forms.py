@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from users.models import MyUser, MedicalPractitioner
+from users.models import MyUser, MedicalPractitioner, SickUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.validators import EmailValidator
 # The Form created below will be customized for the custom user model created.
@@ -30,10 +30,11 @@ class MedPractCreationForm(forms.ModelForm):
     password = forms.CharField(max_length=150, widget=forms.PasswordInput)
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
+    email = forms.EmailField()
 
     class Meta:
         model = MedicalPractitioner
-        fields = ['title', 'first_name', 'last_name', 'username', 'password']
+        fields = ['title', 'first_name', 'last_name', 'email', 'username', 'password']
 
 
 class ProfileForm(forms.Form):
