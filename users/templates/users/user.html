@@ -20,7 +20,7 @@
                                         <p class="font-weight-bold">Email: {{user.email}}</p>
                                         <p class="font-weight-bold">Gender: {{user.gender}}</p>
                                         <p class="font-weight-bold">Birthday: {{user.date_of_birth}}</p> {% endcomment %}
-                                        <form method="POST" class="bootstrap4" novalidate>
+                                        <form method="POST" class="bootstrap4" >
                                             {% csrf_token %}
                                             {{ form|crispy }}
                                             <button type="submit" href="{% url 'data:dashboard' %}" class="btn btn-md btn-primary mt-3">Save</button>
