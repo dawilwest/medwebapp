@@ -38,8 +38,8 @@ class StatisticsView(LoginRequiredMixin, ListView):
     try:
         extra_context = {
             "users_count": users_count,
-            "user_count": round(user_count / users_count) * 100,
-            "medicalpractitioner_count": round((medicalpractitioner_count / users_count) * 100, 1),
+            "user_count": round((user_count / users_count) * 100),
+            "medicalpractitioner_count": round((medicalpractitioner_count / users_count) * 100),
             "medical_data_count": medical_data_count,
 
             # Data Table

@@ -84,8 +84,8 @@ class MedicalPractitioner(models.Model):
     def __str__(self):
         return f"{self.title} {self.myuser}"
 
-    def email(self):
-        return self.myuser.email
+    # def email(self):
+    #     return self.myuser.email
 
-    def username(self):
-        return self.myuser.username
+    # def username(self):
+    #     return self.myuser.username

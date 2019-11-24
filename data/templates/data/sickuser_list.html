@@ -76,43 +76,43 @@
                             </div>
                             <div class="table-responsive">
                             <!-- Projects table -->
-                            <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Names</th>
-                                    <th scope="col">Diagnosis</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Address</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for sickuser in sickusers_list %}
-                                    <tr>
-                                        <th scope="row">
-                                        {{sickuser.user}
-                                        </th>
-                                        <td>
-                                        {{sickuser.sickuser_data}}
-                                        </td>
-                                        {% if  sickuser.sickuser_data.test_result is True %}
-                                            <td>
-                                                Positive
-                                            </td>
-                                        {% else %}
-                                            <td>
-                                                Negative
-                                            </td>
-                                        {% endif %}
-                                        <td>
-                                        <i class="fas fa-address-book text-success mr-3"></i> {{sickuser.sickuser_hospital_location}}
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-sm btb-btn-outline-info">View</a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Names</th>
+                                            <th scope="col">Diagnosis</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for sickuser in sickuser_list %}
+                                            <tr>
+                                                <th scope="row">
+                                                {{sickuser.user}}
+                                                </th>
+                                                <td>
+                                                {{sickuser.sickuser_data}}
+                                                </td>
+                                                {% if  sickuser.sickuser_data.test_result is True %}
+                                                    <td>
+                                                        Positive
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        Negative
+                                                    </td>
+                                                {% endif %}
+                                                <td>
+                                                <i class="fas fa-address-book text-success mr-3"></i> {{sickuser.sickuser_hospital_location}}
+                                                </td>
+                                                <td>
+                                                    <a href="#" class="btn btn-sm btb-btn-outline-info">View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -30,4 +30,4 @@ class SickUserAdmin(admin.ModelAdmin):
 
 @admin.register(MedicalPractitioner)
 class MedicalPractitionerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'myuser', 'email', 'username', 'phone', 'address']
+    list_display = ['id', 'title', 'myuser', 'phone', 'address']
