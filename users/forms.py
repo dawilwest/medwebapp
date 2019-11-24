@@ -99,4 +99,4 @@ class ProfileForm(forms.Form):
             ("Others", "Others"),
         )
     )
-    test_result = forms.ChoiceField(widget=forms.CheckboxInput)
+    test_result = forms.ChoiceField(widget=forms.CheckboxInput())
