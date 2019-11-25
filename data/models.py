@@ -25,6 +25,7 @@ class BloodData(models.Model):
     myuser = models.OneToOneField(
         'users.SickUser',
         on_delete=models.CASCADE,
+        related_name="sickuser_blooddata"
     )
     blood_group = models.CharField(max_length=5, choices=BLOOD_GROUP)
     genotype = models.CharField(max_length=5, choices=GENOTYPE)
@@ -37,6 +38,7 @@ class BodyMeasurementData(models.Model):
     myuser = models.OneToOneField(
         'users.SickUser',
         on_delete=models.CASCADE,
+        related_name="sickuser_bodymeasurement"
     )
 
     height = models.DecimalField(verbose_name="Height (m)", max_digits=5, decimal_places=2)
@@ -56,7 +58,7 @@ class MedicalData(models.Model):
         ("Others", "Others"),
     )
     disease = models.CharField(max_length=200, choices=TYPE_OF_SICKNESS)
-    sickuser = models.OneToOneField(SickUser, on_delete=models.CASCADE, related_name="sickuser_data")
+    sickuser = models.OneToOneField("users.SickUser", on_delete=models.CASCADE, related_name="sickuser_data")
     test_result = models.BooleanField(default=False)
 
     def __str__(self):

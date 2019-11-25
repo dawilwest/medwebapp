@@ -89,7 +89,7 @@
                                         {% for sickuser in sickuser_list %}
                                             <tr>
                                                 <th scope="row">
-                                                {{sickuser.user}}
+                                                {{sickuser.myuser.first_name}} {{sickuser.myuser.last_name}}
                                                 </th>
                                                 <td>
                                                 {{sickuser.sickuser_data}}

@@ -39,9 +39,12 @@ class MedPractCreationForm(forms.ModelForm):
 
 class ProfileForm(forms.Form):
     first_name = forms.CharField(max_length=50)
-    middle_name = forms.CharField(max_length=50)
+    # middle_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
-    username = forms.CharField(validators=[username_validator])
+    username = forms.CharField(validators=[username_validator, ],
+                               widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+                               required=False
+                               )
     email = forms.EmailField(validators=[EmailValidator])
     gender = forms.ChoiceField(
         choices=(
@@ -99,4 +102,24 @@ class ProfileForm(forms.Form):
             ("Others", "Others"),
         )
     )
-    test_result = forms.ChoiceField(widget=forms.CheckboxInput())
+    test_result = forms.ChoiceField(widget=forms.CheckboxInput, choices=((True, True), (False, False)))
+
+
+class MedicalPractitionerProfileForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    phone = forms.CharField(max_length=20)
+    first_name = forms.CharField(max_length=100)
+    # middle_name = forms.CharField(max_length=100, required=False)
+    last_name = forms.CharField(max_length=100)
+    username = forms.CharField(validators=[username_validator, ],
+                               widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+                               required=False,
+                               )
+    email = forms.EmailField(validators=[EmailValidator])
+    gender = forms.ChoiceField(
+        choices=(
+            ('M', "Male",),
+            ('F', "Female",),
+        )
+    )
+    date_of_birth = forms.DateField()

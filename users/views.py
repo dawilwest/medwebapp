@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
-from users.forms import MyUserCreationForm, MedPractCreationForm, ProfileForm
+from users.forms import MyUserCreationForm, MedPractCreationForm, ProfileForm, MedicalPractitionerProfileForm
 from users.models import MyUser, SickUser, MedicalPractitioner
+from data.models import BloodData, BodyMeasurementData, MedicalData, HospitalLocation
 # Django Permissions
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
@@ -64,5 +65,52 @@ class MedPractSignUpView(CreateView):
 
 class ProfileView(FormView):
     template_name = "users/user.html"
-    form_class = ProfileForm
-    success_url = "/accounts/profile"
+    # form_class = ProfileForm if not self.request.user else MedicalPractitionerProfileForm
+    success_url = "/data/"
+
+    def get_form_class(self):
+        form_class = MedicalPractitionerProfileForm if self.request.user.is_staff else ProfileForm
+        return form_class
+
+    def get_context_data(self, **kwargs):
+        contxt = super().get_context_data(**kwargs)
+        user = self.request.user
+        return contxt
+
+    def form_valid(self, form):
+        user = self.request.user
+        if user.is_staff:
+            data = form.cleaned_data
+            print(data)
+            user.first_name = data["first_name"]
+            user.last_name = data["last_name"]
+            user.email = data["email"]
+            user.gender = data["gender"]
+            user.date_of_birth = data["date_of_birth"]
+            user.save()
+
+            medicalpractitioner = MedicalPractitioner.objects.filter(myuser=user)[0]
+            medicalpractitioner.phone = data["phone"]
+            medicalpractitioner.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            data = form.cleaned_data
+            print(data)
+            user.first_name = data["first_name"]
+            user.last_name = data["last_name"]
+            user.email = data["email"]
+            user.gender = data["gender"]
+            # user.date_of_birth = data["date_of_birth"]
+            user.save()
+
+            sickuser = SickUser.objects.filter(myuser=user)[0]
+            # sickuser.phone = data["phone"]
+            sickuser.disease = data["medical_test"]
+            sickuser.test_result = data["test_result"]
+            sickuser.district = data["district"]
+            sickuser.height = data["height"]
+            sickuser.weight = data["weight"]
+            sickuser.genotype = data["genotype"]
+            sickuser.blood_group = data["blood_group"]
+            sickuser.save()
+            return HttpResponseRedirect(self.get_success_url())

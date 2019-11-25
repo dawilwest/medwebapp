@@ -13,20 +13,58 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-11">
                                     <div class="d-flex flex-column mb-4">
-                                        {% comment %} <p class="font-weight-bold">Full Name: {{user.first_name}} {{user.last_name}}</p>
-                                        <p class="font-weight-bold">Username: {{user.username}}</p>
-                                        <p class="font-weight-bold">Email: {{user.email}}</p>
-                                        <p class="font-weight-bold">Gender: {{user.gender}}</p>
-                                        <p class="font-weight-bold">Birthday: {{user.date_of_birth}}</p> {% endcomment %}
-                                        <form role="form" method="POST">
+                                      {% comment %}
+                                      <p class="font-weight-bold">
+                                        Full Name: {{user.first_name}} {{user.last_name}}
+                                      </p>
+                                      <p class="font-weight-bold">Username: {{user.username}}</p>
+                                      <p class="font-weight-bold">Email: {{user.email}}</p>
+                                      <p class="font-weight-bold">Gender: {{user.gender}}</p>
+                                      <p class="font-weight-bold">
+                                        Birthday: {{user.date_of_birth}}
+                                      </p>
+                                      {% endcomment %}
+                                      {% if user.is_superuser %}
+                                      <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                          <p>First Name: {{user.first_name}}</p>
+                                          <p>Middle Name: {{user.middle_name}}</p>
+                                          <p>Last Name: {{user.last_name}}</p>
+                                          <p>Gender: {{user.gender}}</p>
+                                          <p>Date of Birth: {{user.date_of_birth}}</p>
+                                          <p>Username: {{user.username}}</p>
+                                          <p>Email: {{user.email}}</p>
+                                        </div>
+                                        <div class="col-md-6 d-sm-none d-md-block text-center">
+                                          <div class="alert alert-info">Please update your details from the admin dashboard as a
+                                            <strong>superuser admin</strong>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {% else %}
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <p>First Name: {{user.first_name}}</p>
+                                          <p>Last Name: {{user.last_name}}</p>
+                                          <p>Gender: {{user.gender}}</p>
+                                          <p>Date of Birth: {{user.date_of_birth}}</p>
+                                          <p>Username: {{user.username}}</p>
+                                          <p>Email: {{user.email}}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <form role="form" method="POST">
                                             {% csrf_token %}
-                                            {{ form|crispy }}
-                                            <button type="submit" href="{% url 'data:dashboard' %}" class="btn btn-md btn-primary mt-3">Save</button>
-                                        </form>
+                                            {{form | crispy}}
+                                            <button type="submit" href="#" class="btn btn-md btn-primary mt-3">
+                                              Save
+                                            </button>
+                                          </form>
+                                        </div>
+                                      </div>
+                                      {% endif %}
                                     </div>
-
                                 </div>
                             </div>
                         </div>
